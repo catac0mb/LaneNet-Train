@@ -5,28 +5,28 @@ import shutil
 import pandas as pd
 import json
 
-color1 = (40, 40, 40)
-color2 = (80, 80, 80)
-color3 = (120, 120, 120)
-color4 = (160, 160, 160)
-color5 = color3 # trick for one special image that has 5 lanes two of which are the same...
+color1 = (100, 100, 100)
+color2 = (150, 150, 150)
+color3 = (200, 200, 200)
+color4 = (220, 220, 220)
+color5 = color3  # special case for one image
 
 colors=[color1,color2,color3,color4,color5]
 
 thickness = 3
 
-read_path = 'gt_image_7_10'
-write_path = '7_10_gt_instance_image'
+read_path = 'C:/LaneNet-Train/data/Additional_images/Right_resized'
+write_path = 'C:/LaneNet-Train/data/Additional_images/Right_instance'
 
 if os.path.exists(write_path):
 	shutil.rmtree(write_path)
 os.mkdir(write_path)
 
-orig_size = np.array((1280, 720))
+orig_size = np.array((512, 256))
 new_size = np.array((512, 256))
 scale_ratio = new_size / orig_size
 
-data = pd.read_csv('7-10 DB Annotations.csv')
+data = pd.read_csv('C:/LaneNet-Train/data/Additional_images/Right.csv.csv')
 
 print("Processing images...")
 for file in os.listdir(read_path):

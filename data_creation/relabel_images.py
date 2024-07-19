@@ -3,10 +3,10 @@ import cv2
 import shutil
 import numpy as np
 
-image_read_path = 'gt_image_7_10_512x256'
-instance_read_path = '7_10_gt_instance_image'
-image_write_path = '512x256/gt_image'
-instance_write_path = '512x256/gt_instance_image'
+image_read_path = 'C:/Lanenet/LaneNet-Train/data/training_data/image/Right_Resized_512x256'
+instance_read_path = 'C:/Lanenet/LaneNet-Train/data/training_data/image/Right_512x256_instance'
+image_write_path = 'C:/Lanenet/LaneNet-Train/data/training_data/image/Right_image_lane_info'
+instance_write_path = 'C:/Lanenet/LaneNet-Train/data/training_data/image/Right_instance_lane_info'
 
 num_processed = 0
 total_images = len(os.listdir(instance_read_path))

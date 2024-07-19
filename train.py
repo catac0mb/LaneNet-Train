@@ -28,35 +28,22 @@ DEVICE = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 def train():
     args = parse_args()
-    save_path = args.save
+    save_path = 'C:\Lanenet\LaneNet-Train\log'
     if not os.path.isdir(save_path):
         os.makedirs(save_path)
+    print("got save path")
 
-    train_dataset_file = os.path.join(args.dataset, 'train.txt')
-    val_dataset_file = os.path.join(args.dataset, 'val.txt')
+    train_dataset_file = os.path.join('C:/LaneNet-Train/data/image/', 'left_train.txt')
+    val_dataset_file = os.path.join('C:/LaneNet-Train/data/image/', 'left_test.txt')
+    print("got datasets")
 
-    resize_height = args.height
-    resize_width = args.width
-    """
-    data_transforms = {
-        'train': transforms.Compose([
-            transforms.Resize((resize_height, resize_width)),
-            transforms.GaussianBlur(kernel_size=(1, 9), sigma=(0.1, 0.2))
-            transforms.ColorJitter(brightness=0.5, contrast=0.3, saturation=0.2, hue=0.1),
-            transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-        ]),
-        'val': transforms.Compose([
-            transforms.Resize((resize_height, resize_width)),
-            transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-        ]),
-    }
-
-    target_transforms = transforms.Compose([
-        Rescale((resize_width, resize_height)),
-    ])
-    """
+    #resize_height = args.height
+    #resize_width = args.width
+    resize_height = 256
+    resize_width = 512
+    args.epochs = 80 #increase epochs
+    args.bs = 32 #increase batch size
+    
     data_transforms = {
         'train': A.Compose([
             A.HorizontalFlip(p=0.5),
@@ -93,6 +80,7 @@ def train():
 
     model = LaneNet(arch=args.model_type)
     model.to(DEVICE)
+    print("putting lanenet model on device")
 
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     print(f"{args.epochs} epochs {len(train_dataset)} training samples\n")

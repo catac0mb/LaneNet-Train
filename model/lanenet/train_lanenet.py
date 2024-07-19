@@ -43,7 +43,7 @@ def compute_loss(net_output, binary_label, instance_label, device, loss_type = '
     return total_loss, binary_loss, instance_loss, miou, out
 
 
-def train_model(model, optimizer, scheduler, dataloaders, dataset_sizes, device, loss_type = 'FocalLoss', num_epochs=25, pretrained=None, ckpt=False, save_path=None):
+def train_model(model, optimizer, scheduler, dataloaders, dataset_sizes, device, loss_type = 'FocalLoss', num_epochs=50, pretrained=None, ckpt=False, save_path=None):
     since = time.time()
     training_log = {'epoch':[], 'training_loss':[], 'training_miou':[], 'val_loss':[], 'val_miou':[]}
     
